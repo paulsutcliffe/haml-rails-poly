@@ -1,5 +1,7 @@
-%h1 New <%= singular_table_name %>
+= page_title('Nuevo <%= singular_table_name %>')
 
-= render 'form'
+.row
+  .span12
 
-= link_to 'Back', <%= index_helper %>_path
+    = link_to 'Cancelar', '', class: 'btn btn-default btn-left back-js'
+    = render 'form'

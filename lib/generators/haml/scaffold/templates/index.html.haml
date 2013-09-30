@@ -1,23 +1,23 @@
-%h1 Listing <%= plural_table_name %>
+- if current_admin
+  .admin-links-top
+    = link_to 'Nuevo  <%= human_name %>', new_<%= singular_table_name %>_path, class: 'btn btn-default'
 
-%table
-  %tr
+= page_title('<%= plural_table_name %>')
+%p Texto descriptivo
+= page_encabezado_end
+
+.row
+  .span12
+    - @<%= plural_table_name %>.each do |<%= singular_table_name %>|
 <% for attribute in attributes -%>
-    %th <%= attribute.human_name %>
+      .media-title
+        %h2
+          <%= attribute.human_name %>
+      .media-body
+        = <%= singular_table_name %>.<%= attribute.name %>
 <% end -%>
-    %th
-    %th
-    %th
-
-  - @<%= plural_table_name %>.each do |<%= singular_table_name %>|
-    %tr
-<% for attribute in attributes -%>
-      %td= <%= singular_table_name %>.<%= attribute.name %>
-<% end -%>
-      %td= link_to 'Show', <%= singular_table_name %>
-      %td= link_to 'Edit', edit_<%= singular_table_name %>_path(<%= singular_table_name %>)
-      %td= link_to 'Destroy', <%= singular_table_name %>, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New <%= human_name %>', new_<%= singular_table_name %>_path
+      .actions
+        = link_to 'Ver', <%= singular_table_name %>, class: 'btn btn-default'
+        - if current_admin
+          = link_to 'Editar', edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: 'btn btn-default'
+          = link_to 'Eliminar', <%= singular_table_name %>, :method => :delete, :data => { :confirm => '¿Estás Seguro?' }, class: 'btn btn-default'

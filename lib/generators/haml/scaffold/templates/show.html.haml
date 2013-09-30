@@ -1,11 +1,15 @@
-%p#notice= notice
+= page_title('<%= singular_table_name %>')
 
+.row
+  .span12
+
+    = link_to 'Atrás', '', class: 'btn btn-default btn-left back-js'
+
+    - if current_admin
+      = link_to 'Editar', edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: 'btn btn-default'
+.row
+  .span6
 <% for attribute in attributes -%>
-%p
-  %b <%= attribute.human_name %>:
-  = @<%= singular_table_name %>.<%= attribute.name %>
+    %b <%= attribute.human_name %>:
+    = @<%= singular_table_name %>.<%= attribute.name %>
 <% end -%>
-
-= link_to 'Edit', edit_<%= singular_table_name %>_path(@<%= singular_table_name %>)
-\|
-= link_to 'Back', <%= index_helper %>_path
